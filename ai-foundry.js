@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import ModelClient from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 
@@ -22,7 +22,7 @@ var response = await client.path("chat/completions").post({
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    model: "gpt-4.1",
+    model: "gpt-4.1_AIFoundry",
   },
 });
 
