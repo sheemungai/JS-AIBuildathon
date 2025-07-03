@@ -1,6 +1,18 @@
+import 'dotenv/config'; 
+
+const githubToken = process.env.GITHUB_TOKEN;
+if (!githubToken) {
+  throw new Error("Missing GITHUB_TOKEN in environment");
+}
+
 const changes = await git.diff({ staged: true });
 
-defDiff("CODE_CHANGES", changes);
+defDiff(
+  "CODE_CHANGES",          
+  changes,                 
+  "Git Changes Review",    
+);
+
 
 $`## Role
 You are a senior developer whose job is to review code changes and provide meaningful feedback.
