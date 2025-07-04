@@ -1,81 +1,99 @@
-import { AIProjectsClient } from "@azure/ai-projects";
-import { DefaultAzureCredential } from "@azure/identity";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const agentThreads = {};
-
+// Simplified agent service for healthcare assistant
 export class AgentService {
   constructor() {
-    this.client = AIProjectsClient.fromConnectionString(
-      "<YOUR_CONNECTION_STRING>",
-      new DefaultAzureCredential()
-    );
-    
-    // You can get the agent ID from your my-agent.agent.yaml file or the sample code
-    this.agentId = "<YOUR_AGENT_ID>";
+    // Simplified implementation for healthcare assistance
+    this.sessionContexts = {};
   }
 
-  async getOrCreateThread(sessionId) {
-    if (!agentThreads[sessionId]) {
-      const thread = await this.client.agents.createThread();
-      agentThreads[sessionId] = thread.id;
-      return thread.id;
+  async processMessage(sessionId, userMessage) {
+    // Initialize session context if it doesn't exist
+    if (!this.sessionContexts[sessionId]) {
+      this.sessionContexts[sessionId] = {
+        conversationHistory: [],
+        healthTopics: []
+      };
     }
-    return agentThreads[sessionId];
+
+    const context = this.sessionContexts[sessionId];
+    
+    // Add user message to history
+    context.conversationHistory.push({
+      role: "user",
+      content: userMessage,
+      timestamp: new Date().toISOString()
+    });
+
+    // Generate healthcare-focused response based on the message
+    let reply = this.generateHealthcareResponse(userMessage, context);
+
+    // Add agent response to history
+    context.conversationHistory.push({
+      role: "agent",
+      content: reply,
+      timestamp: new Date().toISOString()
+    });
+
+    return {
+      reply: reply,
+      sources: []
+    };
   }
 
-  async processMessage(sessionId, message) {
-    try {
-      const threadId = await this.getOrCreateThread(sessionId);
+  generateHealthcareResponse(userMessage, context) {
+    const message = userMessage.toLowerCase();
+    
+    // Health-related keywords and responses
+    if (message.includes('diet') || message.includes('nutrition') || message.includes('food')) {
+      return `🥗 **Nutrition Guidance**: For a healthy diet, focus on eating a variety of fruits, vegetables, whole grains, and lean proteins. Limit processed foods and added sugars. 
 
-      const createdMessage = await this.client.agents.createMessage(threadId, {
-        role: "user",
-        content: message,
-      });
+**Important**: This is general guidance only. For personalized nutrition advice, especially if you have health conditions, please consult with a registered dietitian or your healthcare provider.`;
+    }
+    
+    if (message.includes('exercise') || message.includes('workout') || message.includes('fitness')) {
+      return `🏃‍♀️ **Exercise Recommendations**: Adults should aim for at least 150 minutes of moderate-intensity aerobic activity per week, plus muscle-strengthening activities twice a week.
 
-      let run = await this.client.agents.createRun(threadId, this.agentId);
-      
-      while (run.status === "queued" || run.status === "in_progress") {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        run = await this.client.agents.getRun(threadId, run.id);
-      }
-      
-      if (run.status !== "completed") {
-        console.error(`Run failed with status: ${run.status}`);
-        return {
-          reply: `Sorry, I encountered an error (${run.status}). Please try again.`,
-        };
-      }
-      
-      const messages = await this.client.agents.listMessages(threadId);
-      
-      const assistantMessages = messages.data
-        .filter(msg => msg.role === "assistant")
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      
-      if (assistantMessages.length === 0) {
-        return { 
-          reply: "I don't have a response at this time. Please try again.",
-        };
-      }
+**Important**: Before starting any new exercise program, especially if you have health conditions or haven't been active, consult with your healthcare provider first.`;
+    }
+    
+    if (message.includes('sleep') || message.includes('tired') || message.includes('insomnia')) {
+      return `😴 **Sleep Health**: Most adults need 7-9 hours of quality sleep per night. Good sleep hygiene includes a consistent bedtime routine, avoiding screens before bed, and keeping your bedroom cool and dark.
 
-      let responseText = "";
-      for (const contentItem of assistantMessages[0].content) {
-        if (contentItem.type === "text") {
-          responseText += contentItem.text.value;
-        }
+**Important**: If you're experiencing persistent sleep problems, this could indicate an underlying health issue. Please consult with a healthcare professional.`;
+    }
+    
+    if (message.includes('stress') || message.includes('anxiety') || message.includes('mental health')) {
+      return `🧠 **Mental Health Support**: Stress management techniques include deep breathing, meditation, regular exercise, and maintaining social connections. It's important to recognize when stress becomes overwhelming.
+
+**Important**: If you're experiencing persistent stress, anxiety, or other mental health concerns, please reach out to a mental health professional or your healthcare provider. Mental health is just as important as physical health.`;
+    }
+
+    if (message.includes('pain') || message.includes('hurt') || message.includes('ache')) {
+      return `⚠️ **Pain Management**: While some minor aches are normal, persistent or severe pain should be evaluated by a healthcare professional. In the meantime, rest, ice/heat therapy, and over-the-counter pain relievers may help with minor discomfort.
+
+**Important**: This is not medical advice. For any concerning pain, especially chest pain, severe headaches, or sudden onset pain, seek immediate medical attention.`;
+    }
+
+    // Default healthcare response
+    return `🏥 **Healthcare Assistant**: I'm here to provide general health and wellness information. I can help with topics like nutrition, exercise, sleep, stress management, and general wellness.
+
+**Remember**: 
+- This information is for educational purposes only
+- Always consult healthcare professionals for medical advice
+- In emergencies, contact emergency services immediately
+- I cannot diagnose conditions or replace professional medical consultation
+
+What specific health topic would you like to learn about?`;
+  }
+
+  // Clean up old sessions (optional - for memory management)
+  cleanupOldSessions() {
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    
+    for (const sessionId in this.sessionContexts) {
+      const lastMessage = this.sessionContexts[sessionId].conversationHistory.slice(-1)[0];
+      if (lastMessage && new Date(lastMessage.timestamp) < oneHourAgo) {
+        delete this.sessionContexts[sessionId];
       }
-      
-      return {
-        reply: responseText,
-      };
-    } catch (error) {
-      console.error("Agent error:", error);
-      return {
-        reply: "Sorry, I encountered an error processing your request. Please try again.",
-      };
     }
   }
 }
