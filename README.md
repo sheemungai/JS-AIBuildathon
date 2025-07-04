@@ -1,134 +1,132 @@
+# 🏥 HealthAI Assistant - Your Personal Health & Wellness Companion
 
+A production-ready AI-powered healthcare and wellness assistant built with Azure AI, LangChain, and modern web technologies. This application provides evidence-based health information, wellness guidance, and personalized recommendations while maintaining strict medical disclaimers and encouraging professional healthcare consultation.
 
-# ⚡️ Quest: I want a Production-Ready Template to customize
+## 🎯 **Problem Solved**
 
-> To reset your progress and select a different quest, click this button:
->
-> [![Reset Progess](https://img.shields.io/badge/Reset--Progress-ff3860?logo=mattermost)](../../issues/new?title=Reset+Quest&labels=reset-quest&body=🔄+I+want+to+reset+my+AI+learning+quest+and+start+from+the+beginning.%0A%0A**Please+wait+about+15+seconds.+Your+progress+will+be+reset,+this+issue+will+automatically+close,+and+you+will+be+taken+back+to+the+Welcome+step+to+select+a+new+quest.**)
+**Healthcare Information Gap**: People need reliable, accessible health guidance but struggle to navigate complex medical information and don't have 24/7 access to healthcare professionals for general wellness questions.
 
-## 📋 Pre-requisites
+**Our Solution**: An AI-powered wellness assistant that provides evidence-based health information, wellness tips, and guidance while always emphasizing the importance of professional medical consultation.
 
-1. A GitHub account
-2. [Visual Studio Code](https://code.visualstudio.com/) installed
-3. [Node.js](https://nodejs.org/en) installed
-4. An Azure subscription. Use the [free trial](https://azure.microsoft.com/free/) if you don't have one, or [Azure for Students](https://azure.microsoft.com/free/students/) if you are a student.
-5. [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-windows) installed
+## ✨ **Features**
 
-## 📝 Overview
+### 🤖 **Dual Chat Modes**
+- **Health Assistant**: General health and wellness information with RAG-powered responses
+- **Wellness Coach**: Personalized wellness guidance and lifestyle recommendations
 
-> [!IMPORTANT]  
-> If you have done the previous quest, ensure you pull your changes from GitHub using `git pull` before continuing with this project to update the project README.
+### 📚 **Knowledge Base Integration**
+- Evidence-based health resources
+- Nutrition and exercise guidelines
+- Mental health and wellness information
+- Preventive care recommendations
 
-Throughout all quests in this project, you have been following a minimalistic approach to building functional AI applications. However, in today's fast-paced world of technology, building robust production-ready AI solutions demands the use of the right tools and frameworks, and adoption of industry best practices.
+### 🛡️ **Safety First**
+- Built-in medical disclaimers
+- Emergency situation guidance
+- Clear boundaries between general information and medical advice
+- Encourages professional healthcare consultation
 
-This can be a daunting task, often requiring:-
-- Too many decisions to make
-- Difficulty in identifying and implementing shifting industry best practices
-- Need for repeatable and scalable solutions
-- Familiarity with the latest tools, services, and frameworks
+### 🎨 **Modern Healthcare UI**
+- Medical-themed gradient design
+- Intuitive chat interface
+- Mobile-responsive layout
+- Accessible design principles
 
-To address these challenges, this quest introduces you azd-templates, a collection of production-ready templates that can be used to quickly build and deploy AI applications. These templates are designed to be easy to use and customizable, allowing you to focus on building your application rather than worrying about the underlying infrastructure.
+## 🚀 **Why This Template?**
 
-## 🧰 Azure Developer CLI (azd)
+I chose the **Serverless GenAI assistant with LangChain** template because:
 
-The Azure Developer CLI (azd) is an open-source, developer-centric command-line (CLI) tool, part of a wider ecosystem to help you accelerate the provisioning and deployment of applications to Azure. Long gone are the many arguments and flags typically used, azd uses intuitive, developer-friendly commands that represent key development stages, boosting your overall productivity.
+1. **Serverless Architecture**: Perfect for healthcare applications that need to scale based on demand
+2. **LangChain Integration**: Enables sophisticated RAG implementation for medical information retrieval
+3. **Production-Ready**: Comes with Azure infrastructure and deployment configuration
+4. **Extensible**: Easy to customize and add healthcare-specific features
 
-| azd command | Objective |
-|-------------|-------------|
-| `azd auth`  | Authenticate with Azure |
-| `azd init`  | Initializes a new project |
-| `azd package`  | Packages the application's code to be deployed to Azure. |
-| `azd provision`  | Provision the Azure resources for an application. |
-| `azd deploy`  | Deploy the application's code to Azure. |
-| `azd up`    | Provisions and deploys the application |
-| `azd down`  | Deletes the Azure resources for an application.
+## 🛠️ **Customizations Made**
 
-## 📚 azd Templates
+### Backend Transformations
+- **Health-Focused System Prompts**: Customized AI prompts for healthcare guidance with medical disclaimers
+- **Medical Knowledge Base**: Replaced employee handbook with comprehensive health resources
+- **Safety Guardrails**: Added healthcare-specific safety measures and disclaimers
+- **Wellness Modes**: Implemented dual chat modes for different types of health guidance
 
-azd templates are a collection of application code (samples) and azd configuration files that can be used to quickly customize and deploy production-ready applications to Azure. 
+### Frontend Enhancements
+- **Healthcare Theme**: Medical gradient design with calming blue and green colors
+- **Intuitive Labels**: Changed from "Employee Handbook" to "Health Resources"
+- **Safety Disclaimers**: Prominent medical disclaimers and emergency guidance
+- **Responsive Design**: Optimized for both desktop and mobile healthcare access
 
-Each template includes:-
-- **Proof-of-concept (PoC) starter code** to help you kickstart your project without starting from scratch. These templates go beyond ‘hello-world’ examples, demonstrating how to build complex systems, allowing you to customize the code, or completely replace with your own,
-- Everything you need to get a **Fully managed end-to-end system/ application** running on Azure, with configuration files to handle one-click deployments,
-- **Reusable Infrastructure as Code (IaC) assets** to provision and maintain cloud services
+### Infrastructure & Deployment
+- **Azure AI Integration**: Leveraged Azure OpenAI for reliable, scalable AI responses
+- **RAG Implementation**: Intelligent retrieval of relevant health information
+- **Session Management**: Maintains conversation context for personalized guidance
+- **Security**: Follows Azure best practices for healthcare data handling
 
-With azd templates, you can: -
-- Focus on writing the best code and deployment infrastructure for your application all in one context
-- Quickly create prototypes and proof-of-concept applications, accelerating innovation
-- Learn industry best practices and patterns for building production-ready AI applications
+## 🏃‍♂️ **Quick Start**
 
-## ✅ Activity: Browse through JS/TS AI Templates
+### Prerequisites
+- Azure subscription with Azure OpenAI access
+- Node.js 18+ installed
+- Azure Developer CLI installed
 
-The key to identifying the right template for your project is to understand the requirements of your application. The templates are designed to be flexible and customizable, allowing you to choose the one that best fits your needs.
+### Environment Setup
+```bash
+# Install dependencies
+npm install
 
-Then:-
-1. Visit the [AI app template](https://azure.github.io/ai-app-templates/?tags=javascript&tags=typescript) gallery to browse through the available templates.
+# Set up environment variables
+# Edit with your Azure OpenAI credentials
+```
 
-    ![AI App templates](https://github.com/Azure-Samples/JS-AI-Build-a-thon/blob/assets/jsai-buildathon-assets/ai-templates.png?raw=true)
+### Local Development
+```bash
+# Start the backend API
+cd packages/webapi
+npm start
 
-2. Once you have identified a template that meets your needs, click on it to view the details and find instructions on how to use it.
+# Start the frontend (in another terminal)
+cd packages/webapp
+npm run dev
+```
 
-    ![Gen AI chat frontend templates](https://github.com/Azure-Samples/JS-AI-Build-a-thon/blob/assets/jsai-buildathon-assets/genai-chat-frontend-template.png?raw=true)
+### Azure Deployment
+```bash
+# Login to Azure
+azd auth login
 
-Some of the popular templates for JavaScript developers are:-
-- [Serverless GenAI assistant with LangChain](https://azure.github.io/ai-app-templates/repo/azure-samples/serverless-chat-langchainjs/)
-- [GenAI chat frontend including debug, restyle, and revisit](https://azure.github.io/ai-app-templates/repo/azure-samples/azure-openai-chat-frontend/)
-- [Build RAG apps with LlamaIndex](https://azure.github.io/ai-app-templates/repo/azure-samples/llama-index-javascript/)
-- [RAG chat with Azure AI Search + JavaScript](https://azure.github.io/ai-app-templates/repo/azure-samples/azure-search-openai-javascript/)
-- [Serverless GenAI assistant using function calling](https://azure.github.io/ai-app-templates/repo/azure-samples/azure-openai-assistant-javascript/)
+# Deploy to Azure
+azd up
+```
 
-## ✅ Activity: Submit your customized project idea for community voting
-### Quest Checklist
+## ⚠️ **Important Medical Disclaimers**
 
-To complete this final challenge and unlock the true power of **AI + Cloud**, you'll pick a ready-made Azure Developer CLI (azd)/ AI template and customize it to solve a problem you care about.
+- **This application provides general health information only**
+- **Not a substitute for professional medical advice, diagnosis, or treatment**
+- **Always consult healthcare providers for medical concerns**
+- **In emergencies, contact emergency services immediately (911 in the US)**
+- **The AI responses are for educational purposes and should not replace medical consultation**
 
-**Checklist**
+## 📸 **Screenshots**
 
-- [ ] Think of a problem that matters to you
+### Main Interface
+![HealthAI Assistant Interface](./screenshots/main-interface.png)
 
-    This can be personal, societal, climate-related, educational — anything that gets you thinking creatively and purposefully.
+### Chat Interaction
+![Healthcare Chat Example](./screenshots/chat-example.png)
 
-- [ ] Browse the azd/ AI template gallery
+## 🔮 **Future Enhancements**
 
-    Find a template that provides a strong starting point for solving your chosen problem. You can explore app types like:
+- **Symptom Checker**: Basic symptom assessment with clear medical disclaimers
+- **Health Tracking**: Integration with fitness trackers and health apps
+- **Multilingual Support**: Health information in multiple languages
+- **Accessibility Features**: Enhanced support for users with disabilities
+- **Telemedicine Integration**: Connect users with real healthcare providers
 
-    - Gen AI copilots
-    - Chat-enabled apps
-    - Data summarizers
-    - RAG implementations
-    - Serverless APIs
-    - Full-stack web apps
+## 📄 **License**
 
-- [ ] Follow the setup instructions provided in your chosen template
-- [ ] Customize it to fit your vision
-    
-    Tweak the front end, update the backend, change the model, connect external data — anything goes. This is where your creativity and dev skills shine.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- [ ] Push your code
+---
 
-    Make sure your new project has a README.md explaining:
-
-    - The problem you’re solving
-    - Why you picked the template
-    - What customizations you made
-
-- [ ] Open a New Issue using the **🛠️ Project Submission - Build-a-thon** issue template
-- [ ] Encourage your peers to upvote your issue for the **People’s Choice spotlight**!
-
-    ⏳ After submission: Keep updating your project as you build. You can edit your issue to reflect new progress and keep your voters informed.
-    
-<!-- [![Complete Quest](https://img.shields.io/badge/Complete--Quest-ff3860?logo=esbuild)](/issues/new?title=Quest:+I+want+a+Production-Ready+Template+to+customize&labels=quest&body=🚀+I%27ve+browsed+through+the+AI+App+Template+gallery%21%0A%0A**After+you+click+on+Create+below,+wait+about+15+seconds.+This+issue+will+automatically+close,+and+the+README+will+update+with+your+next+instructions.**) -->
-
-
-> To skip this quest and select a different one, click this button:
->
-> [![Skip to another quest](https://img.shields.io/badge/Skip--to--another--quest-ff3860?logo=mattermost)](../../issues/new?title=Skip+quest&labels=reset-quest&body=🔄+I+want+to+reset+my+AI+learning+quest+and+start+from+the+beginning.%0A%0A**Please+wait+about+15+seconds.+Your+progress+will+be+reset,+this+issue+will+automatically+close,+and+you+will+be+taken+back+to+the+Welcome+step+to+select+a+new+quest.**)
-
-## 📚 Further Reading
-
-Here are some additional resources to help you learn more about the Azure Developer CLI (azd) and the templates available:
-
-- [Kickstart JS/TS projects with azd Templates](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/kickstart-projects-with-azd-templates/4295235)
-- [Kickstart your JavaScript projects with azd on YouTube](https://www.youtube.com/playlist?list=PLmsFUfdnGr3zzLIPdJsfdSwymIwOsyQ9Z)
+**⚠️ Remember: This tool is for informational purposes only. Always consult with healthcare professionals for medical advice and treatment decisions.**
 
 

@@ -51,8 +51,8 @@ export class ChatInterface extends LitElement {
            <div class="mode-selector">
             <label>Mode:</label>
               <select @change=${this._handleModeChange}>
-                <option value="basic" ?selected=${this.chatMode === 'basic'}>Basic AI</option>
-                <option value="agent" ?selected=${this.chatMode === 'agent'}>Agent</option>
+                <option value="basic" ?selected=${this.chatMode === 'basic'}>Health Assistant</option>
+                <option value="agent" ?selected=${this.chatMode === 'agent'}>Wellness Coach</option>
               </select>
           </div>
           <label class="rag-toggle ${this.chatMode === 'agent' ? 'disabled' : ''}">
@@ -60,7 +60,7 @@ export class ChatInterface extends LitElement {
                   ?checked=${this.ragEnabled} 
                   @change=${this._toggleRag}
                   ?disabled=${this.chatMode === 'agent'}>
-              Use Employee Handbook
+              Use Health Resources
           </label>
       </div>
       <div class="chat-messages">
@@ -82,7 +82,7 @@ export class ChatInterface extends LitElement {
         `)}
         ${this.isRetrieving ? html`
           <div class="message system-message">
-            <p>📚 Searching employee handbook...</p>
+            <p>🏥 Searching health resources...</p>
           </div>
         ` : ''}
         ${this.isLoading && !this.isRetrieving ? html`
@@ -97,8 +97,8 @@ export class ChatInterface extends LitElement {
             <input 
               type="text" 
               placeholder=${this.chatMode === 'basic' ? 
-                "Ask about company policies, benefits, etc..." : 
-                "Ask Agent"}
+                "Ask about health, wellness, nutrition, exercise..." : 
+                "Ask your healthcare questions..."} 
               .value=${this.inputMessage}
               @input=${this._handleInput}
               @keyup=${this._handleKeyUp}
